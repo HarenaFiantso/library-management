@@ -27,7 +27,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: "#/components/schemas/Book"
     put:
       summary: Create or update a list of books
       operationId: crupdateBooks
@@ -37,7 +37,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Book'
+                $ref: "#/components/schemas/Book"
       responses:
         200:
           description: The list of created or updated books
@@ -46,8 +46,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
-  /authors:
+                  $ref: "#/components/schemas/Book"
+  # /authors:
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
 components:
   schemas:
@@ -59,8 +59,8 @@ components:
         bookName:
           type: string
         author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)
           type: string
+          $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
@@ -72,3 +72,17 @@ components:
         releaseDate:
           type: string
           format: date
+    
+    # Create a new component for the Author
+    Author:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        sex:
+          type: string
+          enum:
+            - M
+            - F
