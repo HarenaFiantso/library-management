@@ -85,14 +85,6 @@ paths:
                 items:
                   $ref: "#/components/schemas/Author"
 
-    delete:
-      summary: Delete all authors
-      description: Delete all authors in the system.
-      operationId: deleteAuthors
-      responses:
-        204:
-          description: Authors successfully deleted
-
 components:
   schemas:
     Book:
