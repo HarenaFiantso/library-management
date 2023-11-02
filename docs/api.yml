@@ -42,6 +42,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
+                  
     put:
       summary: Create or update a list of books
       operationId: crupdateBooks
