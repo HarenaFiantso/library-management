@@ -47,8 +47,52 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
-  # /authors:
+
   #TODO2: complete GET (can be filtered by name) - PUT - DELETE
+  /authors:
+    get:
+      summary: Get all authors
+      description: Retrieve a list of all authors.
+      operationId: getAuthors
+      responses:
+        200:
+          description: The list of authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Author"
+
+    put:
+      summary: Create or update authors
+      description: Create or update a list of authors.
+      operationId: createOrUpdateAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/Author"
+      responses:
+        200:
+          description: The list of created or updated authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Author"
+
+    delete:
+      summary: Delete all authors
+      description: Delete all authors in the system.
+      operationId: deleteAuthors
+      responses:
+        204:
+          description: Authors successfully deleted
+
 components:
   schemas:
     Book:
@@ -59,8 +103,9 @@ components:
         bookName:
           type: string
         author:
+          #TODO1: set it as a component with properties : id, name, sex (M or F)
+          $ref: "#/components/schemas/Author"
           type: string
-          $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
@@ -72,7 +117,7 @@ components:
         releaseDate:
           type: string
           format: date
-    
+
     # Create a new component for the Author
     Author:
       type: object
