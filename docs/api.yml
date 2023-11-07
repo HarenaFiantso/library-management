@@ -5,23 +5,29 @@ info:
   description: STD22086
 servers:
   - url: https://library.com
+
+tags:
+  - name: Books
+    description: Operations related to books
+  - name: Authors
+    description: Operations related to authors
+
 paths:
   /books:
     get:
-      summary: Get all books
-      description: The returned books are ordered by updated datetime.
+      summary: Get books
+      description: Retrieve a list of books, with optional filters and pagination.
       operationId: getBooks
+      tags: [Books]
       parameters:
         - in: query
           name: bookName
-          description: Filter return books by given name
-          required: false
+          description: Filter by book name
           schema:
             type: string
         - in: query
           name: releaseDateInterval
-          description: Filter books by release date interval
-          required: false
+          description: Filter by release date interval
           schema:
             type: object
             properties:
@@ -33,21 +39,19 @@ paths:
                 format: date
         - in: query
           name: page
-          description: Page number for pagination
-          required: false
+          description: Page number
           schema:
             type: integer
             default: 1
         - in: query
           name: pageSize
-          description: Number of items per page
-          required: false
+          description: Items per page
           schema:
             type: integer
             default: 50
       responses:
         200:
-          description: The list of filtered books
+          description: List of books
           content:
             application/json:
               schema:
@@ -56,18 +60,19 @@ paths:
                   $ref: "#/components/schemas/Book"
 
     put:
-      summary: Create or update a list of books
+      summary: Create/Update books
       operationId: crupdateBooks
+      tags: [Books]
       requestBody:
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/CrupdateBook"
       responses:
         200:
-          description: The list of created or updated books
+          description: List of created/updated books
           content:
             application/json:
               schema:
@@ -77,18 +82,19 @@ paths:
 
   /books/{bookId}/authors/{authorId}:
     put:
-      summary: Update the author of a book
+      summary: Update author of a book
       operationId: updateBookAuthor
+      tags: [Books]
       parameters:
         - in: path
           name: bookId
-          description: ID of the book
+          description: Book ID
           required: true
           schema:
             type: string
         - in: path
           name: authorId
-          description: ID of the author
+          description: Author ID
           required: true
           schema:
             type: string
@@ -100,6 +106,7 @@ paths:
     put:
       summary: Associate authors with books
       operationId: associateAuthorsWithBooks
+      tags: [Books]
       requestBody:
         content:
           application/json:
@@ -111,30 +118,28 @@ paths:
         200:
           description: Authors associated with books successfully
 
-  #TODO2: complete GET (can be filtered by name) - PUT - DELETE✅
   /authors:
     get:
-      summary: Get all authors
-      description: Retrieve a list of all authors.
+      summary: Get authors
+      description: Retrieve a list of authors with optional pagination.
       operationId: getAuthors
+      tags: [Authors]
       parameters:
         - in: query
           name: page
-          description: Page number for pagination
-          required: false
+          description: Page number
           schema:
             type: integer
             default: 1
         - in: query
           name: pageSize
-          description: Number of items per page
-          required: false
+          description: Items per page
           schema:
             type: integer
             default: 50
       responses:
         200:
-          description: The list of authors
+          description: List of authors
           content:
             application/json:
               schema:
@@ -143,9 +148,9 @@ paths:
                   $ref: "#/components/schemas/Author"
 
     put:
-      summary: Create or update authors
-      description: Create or update a list of authors.
+      summary: Create/Update authors
       operationId: createOrUpdateAuthors
+      tags: [Authors]
       requestBody:
         content:
           application/json:
@@ -155,7 +160,7 @@ paths:
                 $ref: "#/components/schemas/Author"
       responses:
         200:
-          description: The list of created or updated authors
+          description: List of created/updated authors
           content:
             application/json:
               schema:
@@ -164,12 +169,33 @@ paths:
                   $ref: "#/components/schemas/Author"
 
     delete:
-      summary: Delete all authors
+      summary: Delete authors
       description: Delete all authors in the system.
       operationId: deleteAuthors
+      tags: [Authors]
       responses:
         204:
           description: Authors successfully deleted
+
+  /authors/{aId}:
+    delete:
+      summary: Delete an author
+      operationId: deleteAuthor
+      tags: [Authors]
+      parameters:
+        - name: aId
+          in: path
+          description: Author ID to be deleted
+          schema:
+            type: string
+          required: true
+      responses:
+        200:
+          description: The author deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Author"
 
 components:
   schemas:
@@ -181,17 +207,12 @@ components:
         bookName:
           type: string
         author:
-          #TODO1: set it as a component with properties : id, name, sex (M or F)✅
           $ref: "#/components/schemas/Author"
-          type: string
         pageNumbers:
           type: integer
         topic:
           type: string
-          enum:
-            - ROMANCE
-            - COMEDY
-            - OTHER
+          enum: [ROMANCE, COMEDY, OTHER]
         releaseDate:
           type: string
           format: date
@@ -201,26 +222,29 @@ components:
       properties:
         id:
           type: string
-        name:
+        authorName:
           type: string
         sex:
-          type: string
-          enum:
-            - M
-            - F
-    # TODO
+          $ref: "#/components/schemas/Sex"
+
     CrupdateBook:
       allOf:
         - $ref: "#/components/schemas/Book"
-        - properties:
+        - type: object
+          properties:
             author:
               type: string
+
+    Sex:
+      type: string
+      enum: [M, F]
+
     UpdateBookAuthor:
       type: object
       properties:
         bookId:
           type: string
-          description: ID of the book to associate with the author
+          description: Book ID to associate with the author
         authorId:
           type: string
-          description: ID of the author to be associated with the book
+          description: Author ID to associate with the book
