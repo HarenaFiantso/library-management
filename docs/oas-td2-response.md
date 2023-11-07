@@ -1,9 +1,8 @@
-# OAS TD2 responses
+# OAS TD2 reponses - STD22086
 
 **<i>Ce fichier contient les réponses pour les questions evoquées à des dernières parties du TD2 du projet OpenAPI Specification (OAS) !</i>**
 
 <hr/>
-
 <br/>
 
 ### Pourquoi UpdateBookAuthor possède uniquement l’identifiant de CrupdateBook et l’identifiant de Author, mais sans les autres propriétés telles que bookName et authorName comme dans leur composant respectif ? :
@@ -26,6 +25,15 @@ Car l'objectif de `UpdateBookAuthor` est de gérer l'association entre un livre 
   /* l'opération d'association entre le livre ayant l'ID "123" et l'auteur ayant l'ID "456" inclut également la mise à jour du nom du livre et du nom de l'auteur */
 }
 ```
+
+<hr/>
+
+
+<br/>
+
+### Pourquoi les paginations sont-elles nécessaires ? :
+
+C'est nécessaire pour **gérer de grandes quantités de données de manière efficace**. Permet aussi de **diviser les données en pages plus petites**, améliorant **la performance, l'expérience utilisateur et la gestion des ressources du serveur**.
 
 <hr/>
 
