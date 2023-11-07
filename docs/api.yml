@@ -46,7 +46,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: "#/components/schemas/Book"
     put:
       tags:
         - Books
@@ -58,7 +58,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/CrupdateBook'
+                $ref: "#/components/schemas/CrupdateBook"
       responses:
         200:
           description: The list of created or updated books
@@ -67,7 +67,29 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Book'
+                  $ref: "#/components/schemas/Book"
+  #TODO
+  /books/{bookId}/authors/{authorId}:
+    put:
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: authorId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: "Updated successfully"
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: "#/components/schemas/CrupdateBook"
   /authors:
     get:
       summary: Get all authors
@@ -91,7 +113,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'
+                  $ref: "#/components/schemas/Author"
     put:
       summary: Create or update authors
       operationId: crupdateAuthors
@@ -103,7 +125,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Author'
+                $ref: "#/components/schemas/Author"
       responses:
         200:
           description: The list of created or updated authors
@@ -112,7 +134,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Author'
+                  $ref: "#/components/schemas/Author"
   /authors/{aId}:
     delete:
       summary: Delete an author
@@ -132,7 +154,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Author'
+                $ref: "#/components/schemas/Author"
 components:
   schemas:
     Book:
@@ -143,7 +165,7 @@ components:
         bookName:
           type: string
         author:
-          $ref: '#/components/schemas/Author'
+          $ref: "#/components/schemas/Author"
         pageNumbers:
           type: integer
         topic:
@@ -163,14 +185,14 @@ components:
         authorName:
           type: string
         sex:
-          $ref: '#/components/schemas/Sex'
+          $ref: "#/components/schemas/Sex"
     Sex:
       type: string
       enum:
         - M
         - F
     # TODO
-    CrupdateBooks:
+    CrupdateBook:
       type: object
       properties:
         id:
