@@ -172,6 +172,7 @@ components:
       enum:
         - M
         - F
+    # TODO
     CrupdateBooks:
       type: object
       properties:
@@ -179,4 +180,14 @@ components:
           type: string
         bookName:
           type: string
-        
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum:
+            - ROMANCE
+            - COMEDY
+            - OTHER
+          releaseDate:
+            type: string
+            format: date
