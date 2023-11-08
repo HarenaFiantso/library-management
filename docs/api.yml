@@ -25,13 +25,13 @@ paths:
         - $ref: '#/components/parameters/queryPageSize'
       responses:
         200:
-          description: List of books
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
     put:
       summary: Create/Update books
       operationId: crupdateBooks
@@ -45,13 +45,13 @@ paths:
                 $ref: '#/components/schemas/CrupdateBook'
       responses:
         200:
-          description: List of created/updated books
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
   '/books/{bookId}/authors/{authorId}':
     put:
       tags: [Books]
@@ -72,7 +72,13 @@ paths:
             type: string
       responses:
         200:
-          description: Author updated successfully
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
   '/books/authors':
     put:
       tags: [Books]
@@ -87,7 +93,13 @@ paths:
                 $ref: '#/components/schemas/UpdateBookAuthor'
       responses:
         200:
-          description: Authors associated with books successfully
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
   '/books/import':
     post:
       tags: [Books]
@@ -110,15 +122,13 @@ paths:
                 - $ref: '#/components/schemas/ImportAuthor'
       responses:
         200:
-          description: List of imported books or authors
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Book'
-                    - $ref: '#/components/schemas/Author'
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
   '/authors':
     get:
       summary: Get authors
@@ -130,13 +140,13 @@ paths:
         - $ref: '#/components/parameters/queryPageSize'
       responses:
         200:
-          description: List of authors
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Author'
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
     put:
       summary: Create/Update authors
       operationId: createOrUpdateAuthors
@@ -150,21 +160,27 @@ paths:
                 $ref: '#/components/schemas/Author'
       responses:
         200:
-          description: List of created/updated authors
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Author'
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
     delete:
       summary: Delete authors
       description: Delete all authors in the system.
       operationId: deleteAuthors
       tags: [Authors]
       responses:
-        204:
-          description: Authors successfully deleted
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
   '/authors/{aId}':
     delete:
       summary: Delete an author
@@ -179,11 +195,13 @@ paths:
           required: true
       responses:
         200:
-          description: The author deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Author'
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
   '/authors/import':
     post:
       tags: [Authors]
@@ -206,15 +224,13 @@ paths:
                 - $ref: '#/components/schemas/ImportAuthor'
       responses:
         200:
-          description: List of imported authors
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  oneOf:
-                    - $ref: '#/components/schemas/Book'
-                    - $ref: '#/components/schemas/Author'
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
 components:
   responses:
     Response200:
@@ -306,7 +322,7 @@ components:
                       error:
                         type: string
     DefaultResponse:
-      description: Default response for all reponses
+      description: Default response for all responses
       content:
         application/json:
           schema:
