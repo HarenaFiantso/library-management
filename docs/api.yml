@@ -5,13 +5,11 @@ info:
   description: STD22086
 servers:
   - url: https://library.com
-
 tags:
   - name: Books
     description: Operations related to books
   - name: Authors
     description: Operations related to authors
-
 paths:
   "/books":
     get:
@@ -31,7 +29,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
-
     put:
       summary: Create/Update books
       operationId: crupdateBooks
@@ -52,7 +49,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
-
   "/books/{bookId}/authors/{authorId}":
     put:
       tags: [Books]
@@ -74,7 +70,6 @@ paths:
       responses:
         200:
           description: Author updated successfully
-
   "/books/authors":
     put:
       tags: [Books]
@@ -90,7 +85,6 @@ paths:
       responses:
         200:
           description: Authors associated with books successfully
-
   "/authors":
     get:
       summary: Get authors
@@ -109,7 +103,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
-
     put:
       summary: Create/Update authors
       operationId: createOrUpdateAuthors
@@ -130,7 +123,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Author"
-
     delete:
       summary: Delete authors
       description: Delete all authors in the system.
@@ -139,7 +131,6 @@ paths:
       responses:
         204:
           description: Authors successfully deleted
-
   "/authors/{aId}":
     delete:
       summary: Delete an author
@@ -159,8 +150,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Author"
-
 components:
+  responses:
+    DefaultResponse:
+      description: Default response for all reponses
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: "Success"
+              body:
+                type: object
   parameters:
     queryPagination:
       name: page
@@ -170,7 +179,6 @@ components:
       schema:
         type: integer
         default: 1
-
     queryPageSize:
       name: pageSize
       in: query
@@ -179,7 +187,6 @@ components:
       schema:
         type: integer
         default: 50
-
     pathPagination:
       name: page
       in: path
@@ -187,7 +194,6 @@ components:
       required: true
       schema:
         type: integer
-
     pathPageSize:
       name: pageSize
       in: path
@@ -195,7 +201,6 @@ components:
       required: true
       schema:
         type: integer
-
   schemas:
     Book:
       type: object
@@ -214,7 +219,6 @@ components:
         releaseDate:
           type: string
           format: date
-
     Author:
       type: object
       properties:
@@ -224,7 +228,6 @@ components:
           type: string
         sex:
           $ref: "#/components/schemas/Sex"
-
     CrupdateBook:
       allOf:
         - $ref: "#/components/schemas/Book"
@@ -232,11 +235,9 @@ components:
           properties:
             author:
               type: string
-
     Sex:
       type: string
       enum: [M, F]
-
     UpdateBookAuthor:
       type: object
       properties:
