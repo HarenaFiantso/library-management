@@ -1,6 +1,6 @@
 # OAS TD2 reponses - STD22086
 
-**<i>Ce fichier contient les réponses pour les questions evoquées à des dernières parties du TD2 du projet OpenAPI Specification (OAS) !</i>**
+**<i>Ce fichier contient les réponses pour les questions evoquées à des dernières parties du TD2 du projet OpenAPI Specification (OAS) !📢</i>**
 
 <hr/>
 <br/>
