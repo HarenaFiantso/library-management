@@ -85,6 +85,41 @@ paths:
       responses:
         200:
           description: Authors associated with books successfully
+  "/books/import":
+    post:
+      tags: [Books]
+      summary: Import books from Excel or JSON
+      operationId: importBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                books:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/BookImport"
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                excelFile:
+                  type: string
+                  format: binary
+                jsonFile:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: List of imported books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+
   "/authors":
     get:
       summary: Get authors
@@ -219,7 +254,7 @@ components:
                       error:
                         type: string
     Response500:
-      description: Réponse 500 (Internal Server Error)
+      description: Response 500 (Internal Server Error)
       content:
         application/json:
           schema:
@@ -290,6 +325,28 @@ components:
       schema:
         type: integer
   schemas:
+    BookImport:
+      type: object
+      properties:
+        books:
+          type: array
+          items:
+            $ref: "#/components/schemas/BookWithoutID"
+    BookWithoutID:
+      type: object
+      properties:
+        bookName:
+          type: string
+        author:
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum: [ROMANCE, COMEDY, OTHER]
+        releaseDate:
+          type: string
+          format: date
     Book:
       type: object
       properties:
