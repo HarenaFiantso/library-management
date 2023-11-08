@@ -216,6 +216,23 @@ components:
       schema:
         type: integer
         default: 50
+
+    pathPagination:
+      name: page
+      in: path
+      description: Page number for paginated results (defaults to 1)
+      required: true
+      schema:
+        type: integer
+
+    pathPageSize:
+      name: pageSize
+      in: path
+      description: Number of records per page (defaults to 50, max is 100)
+      required: true
+      schema:
+        type: integer
+
   schemas:
     Book:
       type: object
