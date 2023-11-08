@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: "1.2.0"
+  version: '1.2.0'
   description: STD22086
 servers:
   - url: https://library.com
@@ -14,15 +14,15 @@ tags:
   - name: Authors
     description: Operations related to authors
 paths:
-  "/books":
+  '/books':
     get:
       tags: [Books]
       summary: Get books
       description: Retrieve a list of books, with optional filters and pagination.
       operationId: getBooks
       parameters:
-        - $ref: "#/components/parameters/queryPagination"
-        - $ref: "#/components/parameters/queryPageSize"
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/queryPageSize'
       responses:
         200:
           description: List of books
@@ -31,7 +31,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Book"
+                  $ref: '#/components/schemas/Book'
     put:
       summary: Create/Update books
       operationId: crupdateBooks
@@ -42,7 +42,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: "#/components/schemas/CrupdateBook"
+                $ref: '#/components/schemas/CrupdateBook'
       responses:
         200:
           description: List of created/updated books
@@ -51,8 +51,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Book"
-  "/books/{bookId}/authors/{authorId}":
+                  $ref: '#/components/schemas/Book'
+  '/books/{bookId}/authors/{authorId}':
     put:
       tags: [Books]
       summary: Update author of a book
@@ -73,7 +73,7 @@ paths:
       responses:
         200:
           description: Author updated successfully
-  "/books/authors":
+  '/books/authors':
     put:
       tags: [Books]
       summary: Associate authors with books
@@ -84,11 +84,11 @@ paths:
             schema:
               type: array
               items:
-                $ref: "#/components/schemas/UpdateBookAuthor"
+                $ref: '#/components/schemas/UpdateBookAuthor'
       responses:
         200:
           description: Authors associated with books successfully
-  "/books/import":
+  '/books/import':
     post:
       tags: [Books]
       summary: Import books from Excel or JSON
@@ -102,30 +102,32 @@ paths:
                 books:
                   type: array
                   items:
-                    $ref: "#/components/schemas/BookImport"
+                    $ref: '#/components/schemas/BookImport'
           multipart/form-data:
             schema:
               oneOf:
-                - $ref: "#/components/schemas/ImportBook"
-                - $ref: "#/components/schemas/ImportAuthor"
+                - $ref: '#/components/schemas/ImportBook'
+                - $ref: '#/components/schemas/ImportAuthor'
       responses:
         200:
-          description: List of imported books
+          description: List of imported books or authors
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Book"
-  "/authors":
+                  oneOf:
+                    - $ref: '#/components/schemas/Book'
+                    - $ref: '#/components/schemas/Author'
+  '/authors':
     get:
       summary: Get authors
       description: Retrieve a list of authors with optional pagination.
       operationId: getAuthors
       tags: [Authors]
       parameters:
-        - $ref: "#/components/parameters/queryPagination"
-        - $ref: "#/components/parameters/queryPageSize"
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/queryPageSize'
       responses:
         200:
           description: List of authors
@@ -134,7 +136,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Author"
+                  $ref: '#/components/schemas/Author'
     put:
       summary: Create/Update authors
       operationId: createOrUpdateAuthors
@@ -145,7 +147,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: "#/components/schemas/Author"
+                $ref: '#/components/schemas/Author'
       responses:
         200:
           description: List of created/updated authors
@@ -154,7 +156,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Author"
+                  $ref: '#/components/schemas/Author'
     delete:
       summary: Delete authors
       description: Delete all authors in the system.
@@ -163,7 +165,7 @@ paths:
       responses:
         204:
           description: Authors successfully deleted
-  "/authors/{aId}":
+  '/authors/{aId}':
     delete:
       summary: Delete an author
       operationId: deleteAuthor
@@ -181,8 +183,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Author"
-  "/authors/import":
+                $ref: '#/components/schemas/Author'
+  '/authors/import':
     post:
       tags: [Authors]
       summary: Import authors from Excel or JSON
@@ -196,17 +198,12 @@ paths:
                 authors:
                   type: array
                   items:
-                    $ref: "#/components/schemas/AuthorImport"
+                    $ref: '#/components/schemas/AuthorImport'
           multipart/form-data:
             schema:
-              type: object
-              properties:
-                excelFile:
-                  type: string
-                  format: binary
-                jsonFile:
-                  type: string
-                  format: binary
+              oneOf:
+                - $ref: '#/components/schemas/ImportBook'
+                - $ref: '#/components/schemas/ImportAuthor'
       responses:
         200:
           description: List of imported authors
@@ -215,7 +212,9 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Author"
+                  oneOf:
+                    - $ref: '#/components/schemas/Book'
+                    - $ref: '#/components/schemas/Author'
 components:
   responses:
     Response200:
@@ -224,7 +223,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/responses/DefaultResponse"
+              - $ref: '#/components/responses/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -234,7 +233,7 @@ components:
                         example: 200
                       message:
                         type: string
-                        example: "Success"
+                        example: 'Success'
                   body:
                     type: object
                     properties:
@@ -246,7 +245,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/responses/DefaultResponse"
+              - $ref: '#/components/responses/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -256,7 +255,7 @@ components:
                         example: 400
                       message:
                         type: string
-                        example: "Bad Request"
+                        example: 'Bad Request'
                   body:
                     type: object
                     properties:
@@ -268,7 +267,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/responses/DefaultResponse"
+              - $ref: '#/components/responses/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -278,7 +277,7 @@ components:
                         example: 403
                       message:
                         type: string
-                        example: "Forbidden"
+                        example: 'Forbidden'
                   body:
                     type: object
                     properties:
@@ -290,7 +289,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: "#/components/responses/DefaultResponse"
+              - $ref: '#/components/responses/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -300,7 +299,7 @@ components:
                         example: 500
                       message:
                         type: string
-                        example: "Internal Server Error"
+                        example: 'Internal Server Error'
                   body:
                     type: object
                     properties:
@@ -321,7 +320,7 @@ components:
                     example: 200
                   message:
                     type: string
-                    example: "Success"
+                    example: 'Success'
               body:
                 type: object
   parameters:
@@ -362,7 +361,7 @@ components:
         books:
           type: array
           items:
-            $ref: "#/components/schemas/BookWithoutID"
+            $ref: '#/components/schemas/BookWithoutID'
     BookWithoutID:
       type: object
       properties:
@@ -384,7 +383,7 @@ components:
         authors:
           type: array
           items:
-            $ref: "#/components/schemas/AuthorWithoutID"
+            $ref: '#/components/schemas/AuthorWithoutID'
     AuthorWithoutID:
       type: object
       properties:
@@ -426,7 +425,7 @@ components:
         bookName:
           type: string
         author:
-          $ref: "#/components/schemas/Author"
+          $ref: '#/components/schemas/Author'
         pageNumbers:
           type: integer
         topic:
@@ -443,10 +442,10 @@ components:
         authorName:
           type: string
         sex:
-          $ref: "#/components/schemas/Sex"
+          $ref: '#/components/schemas/Sex'
     CrupdateBook:
       allOf:
-        - $ref: "#/components/schemas/Book"
+        - $ref: '#/components/schemas/Book'
         - type: object
           properties:
             author:
