@@ -198,6 +198,24 @@ paths:
                 $ref: "#/components/schemas/Author"
 
 components:
+  parameters:
+    queryPagination:
+      name: page
+      in: query
+      description: Page number for paginated results (defaults to 1)
+      required: false
+      schema:
+        type: integer
+        default: 1
+
+    queryPageSize:
+      name: pageSize
+      in: query
+      description: Number of records per page (defaults to 50, max is 100)
+      required: false
+      schema:
+        type: integer
+        default: 50
   schemas:
     Book:
       type: object
