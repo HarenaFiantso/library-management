@@ -383,7 +383,6 @@ components:
         releaseDate:
           type: string
           format: date
-
     AuthorImport:
       type: object
       properties:
@@ -399,6 +398,31 @@ components:
         sex:
           type: string
           enum: [M, F]
+    ImportAuthor:
+      type: object
+      properties:
+        authorName:
+          type: string
+        sex:
+          type: string
+          enum: [M, F]
+    ImportBook:
+      type: object
+      properties:
+        bookName:
+          type: string
+        author:
+          type: string
+        pageNumbers:
+          type: integer
+        topic:
+          type: string
+          enum: [ROMANCE, COMEDY, OTHER]
+        releaseDate:
+          type: string
+          format: date
+        idAuthor:
+          type: integer
     Book:
       type: object
       properties:
