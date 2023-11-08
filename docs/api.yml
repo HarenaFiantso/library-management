@@ -105,14 +105,9 @@ paths:
                     $ref: "#/components/schemas/BookImport"
           multipart/form-data:
             schema:
-              type: object
-              properties:
-                excelFile:
-                  type: string
-                  format: binary
-                jsonFile:
-                  type: string
-                  format: binary
+              oneOf:
+                - $ref: "#/components/schemas/ImportBook"
+                - $ref: "#/components/schemas/ImportAuthor"
       responses:
         200:
           description: List of imported books
