@@ -152,6 +152,94 @@ paths:
                 $ref: "#/components/schemas/Author"
 components:
   responses:
+    Response200:
+      description: Response 200 (Success)
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/responses/DefaultResponse"
+              - type: object
+                properties:
+                  status:
+                    properties:
+                      code:
+                        type: integer
+                        example: 200
+                      message:
+                        type: string
+                        example: "Success"
+                  body:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+    Response400:
+      description: Response 400 (Bad Request)
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/responses/DefaultResponse"
+              - type: object
+                properties:
+                  status:
+                    properties:
+                      code:
+                        type: integer
+                        example: 400
+                      message:
+                        type: string
+                        example: "Bad Request"
+                  body:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+    Response403:
+      description: Response 403 (Forbidden)
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/responses/DefaultResponse"
+              - type: object
+                properties:
+                  status:
+                    properties:
+                      code:
+                        type: integer
+                        example: 403
+                      message:
+                        type: string
+                        example: "Forbidden"
+                  body:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+    Response500:
+      description: Réponse 500 (Internal Server Error)
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: "#/components/responses/DefaultResponse"
+              - type: object
+                properties:
+                  status:
+                    properties:
+                      code:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: "Internal Server Error"
+                  body:
+                    type: object
+                    properties:
+                      error:
+                        type: string
     DefaultResponse:
       description: Default response for all reponses
       content:
