@@ -119,7 +119,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Book"
-
   "/authors":
     get:
       summary: Get authors
@@ -185,6 +184,40 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Author"
+  "/authors/import":
+    post:
+      tags: [Authors]
+      summary: Import authors from Excel or JSON
+      operationId: importAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                authors:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/AuthorImport"
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                excelFile:
+                  type: string
+                  format: binary
+                jsonFile:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: List of imported authors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Author"
 components:
   responses:
     Response200:
@@ -347,6 +380,22 @@ components:
         releaseDate:
           type: string
           format: date
+
+    AuthorImport:
+      type: object
+      properties:
+        authors:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthorWithoutID"
+    AuthorWithoutID:
+      type: object
+      properties:
+        authorName:
+          type: string
+        sex:
+          type: string
+          enum: [M, F]
     Book:
       type: object
       properties:
