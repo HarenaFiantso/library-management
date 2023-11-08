@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: 1.1.0
+  version: "1.2.0"
   description: STD22086
 servers:
   - url: https://library.com
@@ -13,12 +13,12 @@ tags:
     description: Operations related to authors
 
 paths:
-  /books:
+  "/books":
     get:
+      tags: [Books]
       summary: Get books
       description: Retrieve a list of books, with optional filters and pagination.
       operationId: getBooks
-      tags: [Books]
       parameters:
         - in: query
           name: bookName
@@ -80,11 +80,11 @@ paths:
                 items:
                   $ref: "#/components/schemas/Book"
 
-  /books/{bookId}/authors/{authorId}:
+  "/books/{bookId}/authors/{authorId}":
     put:
+      tags: [Books]
       summary: Update author of a book
       operationId: updateBookAuthor
-      tags: [Books]
       parameters:
         - in: path
           name: bookId
@@ -102,11 +102,11 @@ paths:
         200:
           description: Author updated successfully
 
-  /books/authors:
+  "/books/authors":
     put:
+      tags: [Books]
       summary: Associate authors with books
       operationId: associateAuthorsWithBooks
-      tags: [Books]
       requestBody:
         content:
           application/json:
@@ -118,7 +118,7 @@ paths:
         200:
           description: Authors associated with books successfully
 
-  /authors:
+  "/authors":
     get:
       summary: Get authors
       description: Retrieve a list of authors with optional pagination.
@@ -177,7 +177,7 @@ paths:
         204:
           description: Authors successfully deleted
 
-  /authors/{aId}:
+  "/authors/{aId}":
     delete:
       summary: Delete an author
       operationId: deleteAuthor
