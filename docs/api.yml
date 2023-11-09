@@ -280,7 +280,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/responses/DefaultResponse'
+              - $ref: '#/components/schemas/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -302,7 +302,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/responses/DefaultResponse'
+              - $ref: '#/components/schemas/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -324,7 +324,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/responses/DefaultResponse'
+              - $ref: '#/components/schemas/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -346,7 +346,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/responses/DefaultResponse'
+              - $ref: '#/components/schemas/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -368,7 +368,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/responses/DefaultResponse'
+              - $ref: '#/components/schemas/DefaultResponse'
               - type: object
                 properties:
                   status:
@@ -384,43 +384,6 @@ components:
                     properties:
                       error:
                         type: string
-    DefaultResponse:
-      description: Default response for all responses
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              status:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    example: 200
-                  message:
-                    type: string
-                    example: 'Success'
-              body:
-                type: object
-                additionalProperties: false
-                properties:
-                  result:
-                    type: string
-                    example: 'success'
-                  data:
-                    type: object
-                    properties:
-                      books:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Book'
-                      authors:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Author'
-                required:
-                  - result
-                  - data
   parameters:
     queryPagination:
       name: page
@@ -453,6 +416,39 @@ components:
       schema:
         type: integer
   schemas:
+    DefaultResponse:
+      type: object
+      properties:
+        status:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Success'
+        body:
+          type: object
+          additionalProperties: false
+          properties:
+            result:
+              type: string
+              example: 'success'
+            data:
+              type: object
+              properties:
+                books:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Book'
+                authors:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Author'
+          required:
+            - result
+            - data
     BookImport:
       type: object
       properties:
