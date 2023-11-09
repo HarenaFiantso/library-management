@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: '1.2.0'
+  version: '1.3.0'
   description: STD22086
 servers:
   - url: https://library.com
@@ -11,6 +11,8 @@ tags:
     description: Operations related to books
   - name: Authors
     description: Operations related to authors
+  - name: Visitors
+    description: Operations related to visitors
 paths:
   '/books':
     get:
@@ -284,6 +286,26 @@ paths:
           schema:
             type: string
           required: true
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
+  '/visitors':
+    get:
+      summary: Get visitors
+      description: Retrieve a list of visitors with optional pagination.
+      operationId: getVisitors
+      tags: [Visitors]
+      parameters:
+        - $ref: '#/components/parameters/queryPagination'
+        - $ref: '#/components/parameters/queryPageSize'
       responses:
         200:
           $ref: '#/components/responses/Response200'
