@@ -32,6 +32,60 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
+  '/books/export':
+    get:
+      tags: [Books]
+      summary: Export books to Excel or JSON
+      operationId: exportBooks
+      parameters:
+        - name: format
+          in: query
+          description: Format of the exported data (json or excel)
+          schema:
+            type: string
+            enum: [json, excel]
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
+  '/books/import':
+    post:
+      tags: [Books]
+      summary: Import books from Excel or JSON
+      operationId: importBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                books:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BookImport'
+          multipart/form-data:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ImportBook'
+                - $ref: '#/components/schemas/ImportAuthor'
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
     put:
       summary: Create/Update books
       operationId: crupdateBooks
@@ -95,60 +149,6 @@ paths:
               type: array
               items:
                 $ref: '#/components/schemas/UpdateBookAuthor'
-      responses:
-        200:
-          $ref: '#/components/responses/Response200'
-        400:
-          $ref: '#/components/responses/Response400'
-        403:
-          $ref: '#/components/responses/Response403'
-        404:
-          $ref: '#/components/responses/Response404'
-        500:
-          $ref: '#/components/responses/Response500'
-  '/books/import':
-    post:
-      tags: [Books]
-      summary: Import books from Excel or JSON
-      operationId: importBooks
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                books:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/BookImport'
-          multipart/form-data:
-            schema:
-              oneOf:
-                - $ref: '#/components/schemas/ImportBook'
-                - $ref: '#/components/schemas/ImportAuthor'
-      responses:
-        200:
-          $ref: '#/components/responses/Response200'
-        400:
-          $ref: '#/components/responses/Response400'
-        403:
-          $ref: '#/components/responses/Response403'
-        404:
-          $ref: '#/components/responses/Response404'
-        500:
-          $ref: '#/components/responses/Response500'
-  '/books/export':
-    get:
-      tags: [Books]
-      summary: Export books to Excel or JSON
-      operationId: exportBooks
-      parameters:
-        - name: format
-          in: query
-          description: Format of the exported data (json or excel)
-          schema:
-            type: string
-            enum: [json, excel]
       responses:
         200:
           $ref: '#/components/responses/Response200'
