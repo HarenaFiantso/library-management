@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Library API
-  version: '1.3.0'
+  version: "1.4.0"
   description: STD22086 - STD22089
 servers:
   - url: https://library.com
@@ -14,27 +14,27 @@ tags:
   - name: Visitors
     description: Operations related to visitors
 paths:
-  '/books':
+  "/books":
     get:
       tags: [Books]
       summary: Retrieve a list of books
       description: Retrieve a list of books from the library. You can apply filters and pagination
       operationId: getBooks
       parameters:
-        - $ref: '#/components/parameters/queryPagination'
-        - $ref: '#/components/parameters/queryPageSize'
+        - $ref: "#/components/parameters/queryPagination"
+        - $ref: "#/components/parameters/queryPageSize"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/books/export':
+          $ref: "#/components/responses/Response500"
+  "/books/export":
     get:
       tags: [Books]
       summary: Export books to Excel or JSON
@@ -48,16 +48,16 @@ paths:
             enum: [json, excel]
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/books/borrowed':
+          $ref: "#/components/responses/Response500"
+  "/books/borrowed":
     get:
       tags: [Books]
       summary: Get borrowed books
@@ -65,16 +65,16 @@ paths:
       operationId: getBorrowedBooks
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/books/available':
+          $ref: "#/components/responses/Response500"
+  "/books/available":
     get:
       tags: [Books]
       summary: Get available books
@@ -82,16 +82,16 @@ paths:
       operationId: getAvailableBooks
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/books/import':
+          $ref: "#/components/responses/Response500"
+  "/books/import":
     post:
       tags: [Books]
       summary: Import books from Excel or JSON
@@ -105,23 +105,23 @@ paths:
                 books:
                   type: array
                   items:
-                    $ref: '#/components/schemas/BookImport'
+                    $ref: "#/components/schemas/BookImport"
           multipart/form-data:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/ImportBook'
-                - $ref: '#/components/schemas/ImportAuthor'
+                - $ref: "#/components/schemas/ImportBook"
+                - $ref: "#/components/schemas/ImportAuthor"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
+          $ref: "#/components/responses/Response500"
     put:
       summary: Create/Update books
       operationId: crupdateBooks
@@ -132,19 +132,19 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/CrupdateBook'
+                $ref: "#/components/schemas/CrupdateBook"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/books/{bookId}/authors/{authorId}':
+          $ref: "#/components/responses/Response500"
+  "/books/{bookId}/authors/{authorId}":
     put:
       tags: [Books]
       summary: Update author of a book
@@ -164,16 +164,16 @@ paths:
             type: string
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/books/authors':
+          $ref: "#/components/responses/Response500"
+  "/books/authors":
     put:
       tags: [Books]
       summary: Associate authors with books
@@ -184,39 +184,39 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/UpdateBookAuthor'
+                $ref: "#/components/schemas/UpdateBookAuthor"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/authors':
+          $ref: "#/components/responses/Response500"
+  "/authors":
     get:
       summary: Get authors
       description: Retrieve a list of authors with optional pagination.
       operationId: getAuthors
       tags: [Authors]
       parameters:
-        - $ref: '#/components/parameters/queryPagination'
-        - $ref: '#/components/parameters/queryPageSize'
+        - $ref: "#/components/parameters/queryPagination"
+        - $ref: "#/components/parameters/queryPageSize"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/authors/export':
+          $ref: "#/components/responses/Response500"
+  "/authors/export":
     get:
       tags: [Authors]
       summary: Export Authors to Excel or JSON
@@ -230,16 +230,16 @@ paths:
             enum: [json, excel]
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/authors/import':
+          $ref: "#/components/responses/Response500"
+  "/authors/import":
     post:
       tags: [Authors]
       summary: Import authors from Excel or JSON
@@ -253,23 +253,23 @@ paths:
                 authors:
                   type: array
                   items:
-                    $ref: '#/components/schemas/AuthorImport'
+                    $ref: "#/components/schemas/AuthorImport"
           multipart/form-data:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/ImportBook'
-                - $ref: '#/components/schemas/ImportAuthor'
+                - $ref: "#/components/schemas/ImportBook"
+                - $ref: "#/components/schemas/ImportAuthor"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
+          $ref: "#/components/responses/Response500"
     put:
       summary: Create/Update authors
       operationId: createOrUpdateAuthors
@@ -280,18 +280,18 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Author'
+                $ref: "#/components/schemas/Author"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
+          $ref: "#/components/responses/Response500"
     delete:
       summary: Delete authors
       description: Delete all authors in the system.
@@ -299,16 +299,16 @@ paths:
       tags: [Authors]
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/authors/{aId}':
+          $ref: "#/components/responses/Response500"
+  "/authors/{aId}":
     delete:
       summary: Delete an author
       operationId: deleteAuthor
@@ -322,36 +322,36 @@ paths:
           required: true
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/visitors':
+          $ref: "#/components/responses/Response500"
+  "/visitors":
     get:
       summary: Get visitors
       description: Retrieve a list of visitors with optional pagination.
       operationId: getVisitors
       tags: [Visitors]
       parameters:
-        - $ref: '#/components/parameters/queryPagination'
-        - $ref: '#/components/parameters/queryPageSize'
+        - $ref: "#/components/parameters/queryPagination"
+        - $ref: "#/components/parameters/queryPageSize"
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
-  '/visitors/{visitorId}/activities':
+          $ref: "#/components/responses/Response500"
+  "/visitors/{visitorId}/activities":
     get:
       tags: [Visitors]
       summary: Get visitor activities
@@ -380,17 +380,17 @@ paths:
             format: date
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
+          $ref: "#/components/responses/Response500"
 
-  '/visitors/{visitorId}/borrow':
+  "/visitors/{visitorId}/borrow":
     post:
       tags: [Visitors]
       summary: Visitor borrows a book
@@ -413,40 +413,40 @@ paths:
                   description: ID of the book to borrow
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
+          $ref: "#/components/responses/Response500"
         x-codegen-request-body-name: borrowInfo
         x-codegen-request-body-description: Information for book borrowing
         x-codegen-request-body-example:
-          bookId: '1'
+          bookId: "1"
         x-codegen-response-body-name: borrowResponse
         x-codegen-response-body-description: Response after book borrowing
         x-codegen-response-body-example:
           status:
             code: 200
-            message: 'Success'
+            message: "Success"
           body:
-            result: 'success'
+            result: "success"
             data:
               borrowedBook:
-                id: '1'
-                bookName: 'The Great Gatsby'
+                id: "1"
+                bookName: "The Great Gatsby"
                 author:
-                  id: '1'
-                  authorName: 'F. Scott Fitzgerald'
-                  sex: 'M'
+                  id: "1"
+                  authorName: "F. Scott Fitzgerald"
+                  sex: "M"
                 pageNumbers: 180
-                topic: 'ROMANCE'
-                releaseDate: '2022-01-01'
+                topic: "ROMANCE"
+                releaseDate: "2022-01-01"
                 disponible: false
-  '/visitors/{visitorId}/return':
+  "/visitors/{visitorId}/return":
     post:
       tags: [Visitors]
       summary: Visitor returns a borrowed book
@@ -469,15 +469,15 @@ paths:
                   description: ID of the book to return
       responses:
         200:
-          $ref: '#/components/responses/Response200'
+          $ref: "#/components/responses/Response200"
         400:
-          $ref: '#/components/responses/Response400'
+          $ref: "#/components/responses/Response400"
         403:
-          $ref: '#/components/responses/Response403'
+          $ref: "#/components/responses/Response403"
         404:
-          $ref: '#/components/responses/Response404'
+          $ref: "#/components/responses/Response404"
         500:
-          $ref: '#/components/responses/Response500'
+          $ref: "#/components/responses/Response500"
 components:
   securitySchemes:
     allUser_auth:
@@ -510,7 +510,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/DefaultResponse'
+              - $ref: "#/components/schemas/DefaultResponse"
               - type: object
                 properties:
                   status:
@@ -520,7 +520,7 @@ components:
                         example: 200
                       message:
                         type: string
-                        example: 'Success'
+                        example: "Success"
                   body:
                     type: object
                     properties:
@@ -532,7 +532,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/DefaultResponse'
+              - $ref: "#/components/schemas/DefaultResponse"
               - type: object
                 properties:
                   status:
@@ -542,7 +542,7 @@ components:
                         example: 400
                       message:
                         type: string
-                        example: 'Bad Request'
+                        example: "Bad Request"
                   body:
                     type: object
                     properties:
@@ -554,7 +554,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/DefaultResponse'
+              - $ref: "#/components/schemas/DefaultResponse"
               - type: object
                 properties:
                   status:
@@ -564,7 +564,7 @@ components:
                         example: 403
                       message:
                         type: string
-                        example: 'Forbidden'
+                        example: "Forbidden"
                   body:
                     type: object
                     properties:
@@ -576,7 +576,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/DefaultResponse'
+              - $ref: "#/components/schemas/DefaultResponse"
               - type: object
                 properties:
                   status:
@@ -586,7 +586,7 @@ components:
                         example: 404
                       message:
                         type: string
-                        example: 'Not Found'
+                        example: "Not Found"
                   body:
                     type: object
                     properties:
@@ -598,7 +598,7 @@ components:
         application/json:
           schema:
             allOf:
-              - $ref: '#/components/schemas/DefaultResponse'
+              - $ref: "#/components/schemas/DefaultResponse"
               - type: object
                 properties:
                   status:
@@ -608,7 +608,7 @@ components:
                         example: 500
                       message:
                         type: string
-                        example: 'Internal Server Error'
+                        example: "Internal Server Error"
                   body:
                     type: object
                     properties:
@@ -683,25 +683,25 @@ components:
               example: 200
             message:
               type: string
-              example: 'Success'
+              example: "Success"
         body:
           type: object
           additionalProperties: false
           properties:
             result:
               type: string
-              example: 'success'
+              example: "success"
             data:
               type: object
               properties:
                 books:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Book'
+                    $ref: "#/components/schemas/Book"
                 authors:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Author'
+                    $ref: "#/components/schemas/Author"
           required:
             - result
             - data
@@ -711,7 +711,7 @@ components:
         books:
           type: array
           items:
-            $ref: '#/components/schemas/BookWithoutID'
+            $ref: "#/components/schemas/BookWithoutID"
     BookWithoutID:
       type: object
       properties:
@@ -740,7 +740,7 @@ components:
         authors:
           type: array
           items:
-            $ref: '#/components/schemas/AuthorWithoutID'
+            $ref: "#/components/schemas/AuthorWithoutID"
     AuthorWithoutID:
       type: object
       properties:
@@ -782,7 +782,7 @@ components:
         bookName:
           type: string
         author:
-          $ref: '#/components/schemas/Author'
+          $ref: "#/components/schemas/Author"
         pageNumbers:
           type: integer
         topic:
@@ -804,10 +804,10 @@ components:
         authorName:
           type: string
         sex:
-          $ref: '#/components/schemas/Sex'
+          $ref: "#/components/schemas/Sex"
     CrupdateBook:
       allOf:
-        - $ref: '#/components/schemas/Book'
+        - $ref: "#/components/schemas/Book"
         - type: object
           properties:
             author:
