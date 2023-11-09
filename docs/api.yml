@@ -488,12 +488,19 @@ components:
           type: string
         pageNumbers:
           type: integer
+          minimum: 1
         topic:
           type: string
           enum: [ROMANCE, COMEDY, OTHER]
         releaseDate:
           type: string
           format: date
+      required:
+        - bookName
+        - author
+        - pageNumbers
+        - topic
+        - releaseDate
     AuthorImport:
       type: object
       properties:
