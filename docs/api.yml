@@ -480,15 +480,29 @@ paths:
           $ref: '#/components/responses/Response500'
 components:
   securitySchemes:
-    oauth2:
+    allUser_auth:
       type: oauth2
       flows:
-        authorizationCode:
-          authorizationUrl: 'https://h2.com/oauth/authorize'
-          tokenUrl: 'https://h2.com/oauth/token'
+        implicit:
+          authorizationUrl: https://h2.com/oauth/authorize
           scopes:
-            read: Read access
-            write: Write access
+            read:books: read list of books
+            read:authors: read list of authors
+    admin_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://h2.com/oauth/authorize
+          scopes:
+            write:books: add/update books
+            write:authors: add/update authors
+            read:books: read list of books
+            read:authors: read list of authors
+            borrow:books: borrow books
+            return:books: return books
+            import:books: import books
+            import:authors: import authors
+
   responses:
     Response200:
       description: Response 200 (Success)
