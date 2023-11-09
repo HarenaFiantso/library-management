@@ -383,6 +383,30 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
+        x-codegen-request-body-name: borrowInfo
+        x-codegen-request-body-description: Information for book borrowing
+        x-codegen-request-body-example:
+          bookId: '1'
+        x-codegen-response-body-name: borrowResponse
+        x-codegen-response-body-description: Response after book borrowing
+        x-codegen-response-body-example:
+          status:
+            code: 200
+            message: 'Success'
+          body:
+            result: 'success'
+            data:
+              borrowedBook:
+                id: '1'
+                bookName: 'The Great Gatsby'
+                author:
+                  id: '1'
+                  authorName: 'F. Scott Fitzgerald'
+                  sex: 'M'
+                pageNumbers: 180
+                topic: 'ROMANCE'
+                releaseDate: '2022-01-01'
+                disponible: false
   '/visitors/{visitorId}/return':
     post:
       tags: [Visitors]
