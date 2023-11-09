@@ -349,6 +349,38 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
+  '/visitors/{visitorId}/return':
+    post:
+      tags: [Visitors]
+      summary: Visitor returns a borrowed book
+      operationId: visitorReturnBook
+      parameters:
+        - in: path
+          name: visitorId
+          description: ID of the visitor returning the book
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: string
+                  description: ID of the book to return
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
 components:
   responses:
     Response200:
