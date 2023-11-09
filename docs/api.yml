@@ -218,6 +218,29 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
+  '/authors/export':
+    get:
+      tags: [Authors]
+      summary: Export Authors to Excel or JSON
+      operationId: exportAuhors
+      parameters:
+        - name: format
+          in: query
+          description: Format of the exported data (json or excel)
+          schema:
+            type: string
+            enum: [json, excel]
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
   '/authors/{aId}':
     delete:
       summary: Delete an author
