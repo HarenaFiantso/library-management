@@ -351,6 +351,45 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
+  '/visitors/{visitorId}/activities':
+    get:
+      tags: [Visitors]
+      summary: Get visitor activities
+      description: Retrieve a list of activities (borrowing and returning books) performed by a visitor.
+      operationId: getVisitorActivities
+      parameters:
+        - in: path
+          name: visitorId
+          description: ID of the visitor
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: startDate
+          description: Start date for filtering activities
+          required: false
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: endDate
+          description: End date for filtering activities
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
+
   '/visitors/{visitorId}/borrow':
     post:
       tags: [Visitors]
