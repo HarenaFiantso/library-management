@@ -339,6 +339,25 @@ components:
                     example: 'Success'
               body:
                 type: object
+                additionalProperties: false
+                properties:
+                  result:
+                    type: string
+                    example: 'success'
+                  data:
+                    type: object
+                    properties:
+                      books:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Book'
+                      authors:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Author'
+                required:
+                  - result
+                  - data
   parameters:
     queryPagination:
       name: page
