@@ -74,6 +74,23 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
+  '/books/available':
+    get:
+      tags: [Books]
+      summary: Get available books
+      description: Retrieve a list of books that are currently available for borrowing.
+      operationId: getAvailableBooks
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
   '/books/import':
     post:
       tags: [Books]
