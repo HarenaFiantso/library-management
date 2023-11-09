@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Library API
   version: '1.3.0'
-  description: STD22086
+  description: STD22086 - STD22089
 servers:
   - url: https://library.com
     description: Main server
@@ -670,6 +670,11 @@ components:
         releaseDate:
           type: string
           format: date
+        status:
+          type: string
+          enum:
+            - available
+            - borrowed
     Author:
       type: object
       properties:
