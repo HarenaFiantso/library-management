@@ -479,6 +479,16 @@ paths:
         500:
           $ref: '#/components/responses/Response500'
 components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://h2.com/oauth/authorize'
+          tokenUrl: 'https://h2.com/oauth/token'
+          scopes:
+            read: Read access
+            write: Write access
   responses:
     Response200:
       description: Response 200 (Success)
