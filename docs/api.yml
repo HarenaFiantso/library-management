@@ -670,6 +670,8 @@ components:
         releaseDate:
           type: string
           format: date
+        disponible:
+          type: boolean
     Author:
       type: object
       properties:
