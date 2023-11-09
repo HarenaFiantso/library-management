@@ -525,6 +525,32 @@ components:
       schema:
         type: integer
   schemas:
+    BorrowInfoVisitor:
+      type: object
+      properties:
+        visitorId:
+          type: string
+          description: ID of the visitor borrowing the book
+        bookId:
+          type: string
+          description: ID of the borrowed book
+        borrowDate:
+          type: string
+          format: date-time
+          description: Date and time of borrowing
+    ReturnInfoVisitor:
+      type: object
+      properties:
+        visitorId:
+          type: string
+          description: ID of the visitor returning the book
+        bookId:
+          type: string
+          description: ID of the returned book
+        returnDate:
+          type: string
+          format: date-time
+          description: Date and time of return
     DefaultResponse:
       type: object
       properties:
