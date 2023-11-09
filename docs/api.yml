@@ -6,8 +6,6 @@ info:
 servers:
   - url: https://library.com
     description: Main server
-  - url: https://libraryImport.com/
-    description: A server to import data
 tags:
   - name: Books
     description: Operations related to books
@@ -120,6 +118,27 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/ImportBook'
                 - $ref: '#/components/schemas/ImportAuthor'
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        500:
+          $ref: '#/components/responses/Response500'
+  '/books/export':
+    get:
+      tags: [Books]
+      summary: Export books to Excel or JSON
+      operationId: exportBooks
+      parameters:
+        - name: format
+          in: query
+          description: Format of the exported data (json or excel)
+          schema:
+            type: string
+            enum: [json, excel]
       responses:
         200:
           $ref: '#/components/responses/Response200'
@@ -294,6 +313,28 @@ components:
                       message:
                         type: string
                         example: 'Forbidden'
+                  body:
+                    type: object
+                    properties:
+                      error:
+                        type: string
+    Response404:
+      description: Response 404 (Not Found)
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/responses/DefaultResponse'
+              - type: object
+                properties:
+                  status:
+                    properties:
+                      code:
+                        type: integer
+                        example: 404
+                      message:
+                        type: string
+                        example: 'Not Found'
                   body:
                     type: object
                     properties:
