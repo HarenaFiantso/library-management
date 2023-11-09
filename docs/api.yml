@@ -180,6 +180,60 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
+  '/authors/export':
+    get:
+      tags: [Authors]
+      summary: Export Authors to Excel or JSON
+      operationId: exportAuhors
+      parameters:
+        - name: format
+          in: query
+          description: Format of the exported data (json or excel)
+          schema:
+            type: string
+            enum: [json, excel]
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
+  '/authors/import':
+    post:
+      tags: [Authors]
+      summary: Import authors from Excel or JSON
+      operationId: importAuthors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                authors:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AuthorImport'
+          multipart/form-data:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/ImportBook'
+                - $ref: '#/components/schemas/ImportAuthor'
+      responses:
+        200:
+          $ref: '#/components/responses/Response200'
+        400:
+          $ref: '#/components/responses/Response400'
+        403:
+          $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
+        500:
+          $ref: '#/components/responses/Response500'
     put:
       summary: Create/Update authors
       operationId: createOrUpdateAuthors
@@ -218,29 +272,6 @@ paths:
           $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
-  '/authors/export':
-    get:
-      tags: [Authors]
-      summary: Export Authors to Excel or JSON
-      operationId: exportAuhors
-      parameters:
-        - name: format
-          in: query
-          description: Format of the exported data (json or excel)
-          schema:
-            type: string
-            enum: [json, excel]
-      responses:
-        200:
-          $ref: '#/components/responses/Response200'
-        400:
-          $ref: '#/components/responses/Response400'
-        403:
-          $ref: '#/components/responses/Response403'
-        404:
-          $ref: '#/components/responses/Response404'
-        500:
-          $ref: '#/components/responses/Response500'
   '/authors/{aId}':
     delete:
       summary: Delete an author
@@ -253,37 +284,6 @@ paths:
           schema:
             type: string
           required: true
-      responses:
-        200:
-          $ref: '#/components/responses/Response200'
-        400:
-          $ref: '#/components/responses/Response400'
-        403:
-          $ref: '#/components/responses/Response403'
-        404:
-          $ref: '#/components/responses/Response404'
-        500:
-          $ref: '#/components/responses/Response500'
-  '/authors/import':
-    post:
-      tags: [Authors]
-      summary: Import authors from Excel or JSON
-      operationId: importAuthors
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                authors:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/AuthorImport'
-          multipart/form-data:
-            schema:
-              oneOf:
-                - $ref: '#/components/schemas/ImportBook'
-                - $ref: '#/components/schemas/ImportAuthor'
       responses:
         200:
           $ref: '#/components/responses/Response200'
