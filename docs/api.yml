@@ -28,6 +28,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
     put:
@@ -48,6 +50,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
   '/books/{bookId}/authors/{authorId}':
@@ -75,6 +79,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
   '/books/authors':
@@ -96,6 +102,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
   '/books/import':
@@ -125,6 +133,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
   '/books/export':
@@ -146,6 +156,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
   '/authors':
@@ -164,6 +176,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
     put:
@@ -184,6 +198,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
     delete:
@@ -198,6 +214,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
   '/authors/{aId}':
@@ -219,6 +237,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
   '/authors/import':
@@ -248,6 +268,8 @@ paths:
           $ref: '#/components/responses/Response400'
         403:
           $ref: '#/components/responses/Response403'
+        404:
+          $ref: '#/components/responses/Response404'
         500:
           $ref: '#/components/responses/Response500'
 components:
