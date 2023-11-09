@@ -17,8 +17,8 @@ paths:
   '/books':
     get:
       tags: [Books]
-      summary: Get books
-      description: Retrieve a list of books, with optional filters and pagination.
+      summary: Retrieve a list of books
+      description: Retrieve a list of books from the library. You can apply filters and pagination
       operationId: getBooks
       parameters:
         - $ref: '#/components/parameters/queryPagination'
