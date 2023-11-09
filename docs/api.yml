@@ -608,3 +608,13 @@ components:
         authorId:
           type: string
           description: Author ID to associate with the book
+
+    Visitor:
+      type: object
+      properties:
+        id:
+          type: string
+        visitorName:
+          type: string
+        reference:
+          type: string
